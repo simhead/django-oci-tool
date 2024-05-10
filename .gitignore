@@ -1,0 +1,57 @@
+# Python bytecode
+__pycache__
+
+# Packages
+*.egg-info/
+dist/
+build/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# IDE and editor files
+.idea/
+.vscode/
+.spyderproject/
+.ipynb_checkpoints/
+
+# Text editor backups and temporary files
+*.swp
+*.swo
+*.pyc
+
+# Virtual environment
+.venv/
+env/
+
+# SQLite database
+db.sqlite3
+*.sqlite3
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+
+# Unit tests / test runner output
+.pytest_cache/
+test-results/
+
+# Optional: OS specific temporary files
+# These may vary depending on your operating system
+*.py~
+*~
+
+# Dependency lock files (choose one based on your package manager)
+# Pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# pdm
+pdm.lock
