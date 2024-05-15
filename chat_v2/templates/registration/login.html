@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Include any CSS stylesheets or meta tags here -->
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <!-- Add links for password reset, registration, etc. if needed -->
+        <p>Forgot your password? <a href="{ url 'password_reset' }">Reset it here</a>.</p>
+        <p>Don't have an account? <a href="{ url 'register' }">Sign up here</a>.</p>
+    </div>
+    <!-- Include any JavaScript scripts or additional HTML elements here -->
+</body>
+</html>

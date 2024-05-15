@@ -2,7 +2,7 @@
 
 from django.urls import re_path, path
 
-from . import consumers, consumers_async
+from .consumers import SingleChannelConsumer
 
 '''
 recommend using path whenever you can!
@@ -35,5 +35,5 @@ websocket_urlpatterns = [
 
     # trying out AsyncWebsocketConsumer to address some WebsocketConsumer concerns
     # re_path(r'ws/chat_v2/(?P<room_name>\w+)/$', consumers_async.ChatConsumer.as_asgi()),
-    path(f'ws/chat_v2/<room_name>/', consumers_async.ChatConsumer.as_asgi()),
+    path(f'ws/example/<room_name>/', SingleChannelConsumer.as_asgi()),
 ]

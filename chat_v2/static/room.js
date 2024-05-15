@@ -90,7 +90,7 @@ function connect() {
     chatSocket.onmessage = function(e) {
         try {
             const data = JSON.parse(e.data);
-            // console.log(data);
+            console.log(data.type);
 
             switch (data.type) {
                 case "chat_message":

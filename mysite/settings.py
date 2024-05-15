@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'daphne',
     'chat',
     'chat_v2',
+    'example',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,6 +75,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 ASGI_APPLICATION = "mysite.asgi.application"
 
+'''
+Channel layers are an entirely optional part of Channels. 
+If you don’t want to use them, just leave CHANNEL_LAYERS unset, or set it to the empty dict {}.
+'channels_redis' is the only official Django-maintained channel layer supported for production use. 
+The layer uses Redis as its backing store, and it supports both a single-server and sharded configurations as well as group support.
+'''
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",

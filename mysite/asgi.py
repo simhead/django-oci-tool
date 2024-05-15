@@ -10,8 +10,9 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 import os
 
 from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.routing import ProtocolTypeRouter, URLRouter, ChannelNameRouter
 from channels.security.websocket import AllowedHostsOriginValidator
+from channels_redis.core import RedisChannelLayer
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
@@ -23,6 +24,7 @@ import chat.routing
 import chat_v2.routing
 from chat.routing import websocket_urlpatterns as chat_websocket_urlpatterns
 from chat_v2.routing import websocket_urlpatterns as chat_v2_websocket_urlpatterns
+from chat_v2.consumers_async import GenerateConsumer, DeleteConsumer
 
 # application = ProtocolTypeRouter(
 #     {
@@ -33,8 +35,14 @@ from chat_v2.routing import websocket_urlpatterns as chat_v2_websocket_urlpatter
 #     }
 # )
 
-# To open another WebSocket for chat.routing, 
-# modify application variable to include another WebSocket route for the chat.routing.websocket_urlpatterns. 
+'''
+To open another WebSocket for chat.routing, 
+modify application variable to include another WebSocket route for the chat.routing.websocket_urlpatterns. 
+
+Adding another chat room/workspace with chat_v2 with associated Consumer defined in chat_v2.routing
+
+URLs and Consumer are all defined in routing.py
+'''
 application = ProtocolTypeRouter(
     {
         "http": django_asgi_app,
@@ -45,5 +53,10 @@ application = ProtocolTypeRouter(
                 )
             )
         ),
+        # "channel": RedisChannelLayer(),
+        "channel": ChannelNameRouter({
+            "thumbnails-generate": GenerateConsumer.as_asgi(),
+            "thumbnails-delete": DeleteConsumer.as_asgi(),
+        }),
     }
 )

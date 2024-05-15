@@ -21,15 +21,18 @@ class Room(models.Model):
         self.online.remove(user)
         self.save()
 
+    # title of Room row
     def __str__(self):
         return f'{self.name} ({self.get_online_count()})'
-
 
 class Message(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     room = models.ForeignKey(to=Room, on_delete=models.CASCADE)
-    content = models.CharField(max_length=512)
+    command = models.CharField(max_length=256, default='blank')
+    content = models.TextField()
+    timetaken = models.FloatField(default=0.0, blank=True)  # Added timetaken field
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    # title of Message row
     def __str__(self):
-        return f'{self.user.username}: {self.content} [{self.timestamp}]'
+        return f'{self.user.username}: {self.room.name}'
